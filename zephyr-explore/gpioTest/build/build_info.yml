@@ -1,0 +1,56 @@
+cmake:
+  application:
+    configuration-dir: '/home/isss/zephyrproject/gpioTest'
+    source-dir: '/home/isss/zephyrproject/gpioTest'
+  board:
+    name: 'nucleo_h723zg'
+    path:
+     - '/home/isss/zephyrproject/zephyr/boards/st/nucleo_h723zg'
+    qualifiers: 'stm32h723xx'
+    revision: ''
+  devicetree:
+    bindings-dirs:
+     - '/home/isss/zephyrproject/zephyr/dts/bindings'
+    files:
+     - '/home/isss/zephyrproject/zephyr/boards/st/nucleo_h723zg/nucleo_h723zg.dts'
+     - '/home/isss/zephyrproject/gpioTest/app.overlay'
+    include-dirs:
+     - '/home/isss/zephyrproject/modules/hal/atmel/include'
+     - '/home/isss/zephyrproject/modules/hal/gigadevice/include'
+     - '/home/isss/zephyrproject/modules/hal/microchip/include'
+     - '/home/isss/zephyrproject/modules/hal/microchip/dts'
+     - '/home/isss/zephyrproject/modules/hal/nuvoton/dts'
+     - '/home/isss/zephyrproject/modules/hal/nxp/dts'
+     - '/home/isss/zephyrproject/modules/hal/stm32/dts'
+     - '/home/isss/zephyrproject/zephyr/include'
+     - '/home/isss/zephyrproject/zephyr/include/zephyr'
+     - '/home/isss/zephyrproject/zephyr/dts/common'
+     - '/home/isss/zephyrproject/zephyr/dts/x86'
+     - '/home/isss/zephyrproject/zephyr/dts/xtensa'
+     - '/home/isss/zephyrproject/zephyr/dts/sparc'
+     - '/home/isss/zephyrproject/zephyr/dts/riscv'
+     - '/home/isss/zephyrproject/zephyr/dts/posix'
+     - '/home/isss/zephyrproject/zephyr/dts/nios2'
+     - '/home/isss/zephyrproject/zephyr/dts/arm64'
+     - '/home/isss/zephyrproject/zephyr/dts/arm'
+     - '/home/isss/zephyrproject/zephyr/dts/arc'
+     - '/home/isss/zephyrproject/zephyr/dts'
+    user-files:
+     - '/home/isss/zephyrproject/gpioTest/app.overlay'
+  kconfig:
+    files:
+     - '/home/isss/zephyrproject/zephyr/boards/st/nucleo_h723zg/nucleo_h723zg_defconfig'
+     - '/home/isss/zephyrproject/gpioTest/prj.conf'
+    user-files:
+     - '/home/isss/zephyrproject/gpioTest/prj.conf'
+  toolchain:
+    name: 'zephyr'
+    path: '/usr/local/zephyr-sdk-0.16.9'
+  zephyr:
+    version: '4.1.99'
+    zephyr-base: '/home/isss/zephyrproject/zephyr'
+version: '0.1.0'
+west:
+  command: '/home/isss/zephyrproject/.venv/bin/west build -p always -b nucleo_h723zg'
+  topdir: '/home/isss/zephyrproject'
+  version: '1.3.0'

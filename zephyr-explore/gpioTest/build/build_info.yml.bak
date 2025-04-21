@@ -1,0 +1,4 @@
+west:
+  command: /home/isss/zephyrproject/.venv/bin/west build -p always -b nucleo_h723zg
+  topdir: /home/isss/zephyrproject
+  version: 1.3.0
