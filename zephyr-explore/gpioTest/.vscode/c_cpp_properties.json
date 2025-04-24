@@ -4,8 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/isss/zephyrproject/zephyr/include/zephyr",
-                "/home/isss/zephyrproject/zephyr/include"
+                "/home/roham/zephyrproject/zephyr/include/zephyr",
+                "/home/roham/zephyrproject/zephyr/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

@@ -1,0 +1,4 @@
+&gpioe {
+    label = "mygpioe";
+    status = "okay";
+};
