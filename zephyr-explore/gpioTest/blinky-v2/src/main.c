@@ -24,6 +24,7 @@
 
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/drivers/spi.h>
 
 
 #define SLEEP_TIME_MS 500 
@@ -38,9 +39,10 @@
 int main(){
 	
     struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
-
+	struct spi_dt_spec my_spi;
 	gpio_pin_configure_dt(&led,GPIO_OUTPUT_ACTIVE);
-
+	my_spi.config.cs
+	spi_write_dt();
 	while(1) {
 		gpio_pin_toggle_dt(&led);
 		if(gpio_pin_get_dt(&led))

@@ -52,7 +52,7 @@ int main(){
 	// const struct device *dev = device_get_by_dt_nodelabel("gpioe");
 	// if(!dev)
 	// 	return 0;
-	gpio_pin_configure(dev, 1, GPIO_OUTPUT); // configure as output 
+	gpio_pin_configure(dev, 1, GPIO_OUTPUT ); // configure as output 
 	
 	while(1) {
 		gpio_pin_toggle(dev, 1); // toggles the pin
