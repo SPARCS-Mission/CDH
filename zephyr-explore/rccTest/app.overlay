@@ -1,0 +1,12 @@
+&clk_hsi{
+    status = "okay";
+};
+
+&pll{
+    clocks = < &clk_hsi >;
+    mul-n = < 0x1f >;
+};
+
+&rcc{
+    clock-frequency = < 0x1dcd6500 >;
+};
