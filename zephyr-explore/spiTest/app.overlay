@@ -1,28 +1,14 @@
-&gpioa {
-    status = "okay";
-};
 
-&gpioe {
-    label = "mygpioe";
-    status = "okay";
-};
 
-&leds{
-    	purple_led: led_20 {
-			gpios = < &gpioe 0x3 0x0 >;
-			label = "User LD20";
-		};
-};
-/*
 &spi1 {
     status = "okay";
     cs-gpios = <&gpioa 7 GPIO_ACTIVE_LOW>;
 
-    my_spi_device: myspidev@0 {
+   /* my_spi_device: myspidev@0 {
         
         reg = <0>;
         spi-max-frequency = <1000000>;
         label = "MY_SPI_DEVICE";
-    };
-};*/
+    };*/
+};
 
