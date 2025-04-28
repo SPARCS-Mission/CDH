@@ -3,12 +3,10 @@
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/spi.h>
-#define SPI_CS_NODE DT_NODELABEL(myspidev)
+// #define SPI_CS_NODE DT_NODELABEL(myspidev)
 
 int main(){
-
-	const struct device *const dev = DEVICE_DT_GET(DT_NODELABEL(spi1));
-    
+	const struct device *const dev = DEVICE_DT_GET(DT_NODELABEL(spi2));
     
 	if (!device_is_ready(dev)) {
 		printk("%s: device not ready.\n", dev->name);
@@ -21,13 +19,13 @@ int main(){
 		.delay = 0u,
 	};
 
-  // REMOVE cs config entirely
+//   REMOVE cs config entirely
     struct spi_config config = {
     .frequency = 1000000,
     .operation = SPI_OP_MODE_MASTER | SPI_WORD_SET(8),
     .slave = 0,
     .cs = NULL,  // <-- key change
-};
+    };
 
     
     while(1){

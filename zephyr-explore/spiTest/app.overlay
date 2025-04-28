@@ -1,12 +1,40 @@
-&spi1 {
-    status = "okay";
+/*&spi1 {
     cs-gpios = <&gpioa 7 GPIO_ACTIVE_LOW>;
 
-    my_spi_device: myspidev@0 {
+    my_spi_device: my_port: myspidev@0 {
         
         reg = <0>;
         spi-max-frequency = <1000000>;
         label = "MY_SPI_DEVICE";
     };
+};*/
+/*
+&spi2 {
+    pinctrl-0 = < &spi2_sck_pa9 &spi2_miso_pb14 &spi2_mosi_pb15 >;
+    pinctrl-names = "default";
+    cs-gpios = <&gpioa 7 GPIO_ACTIVE_LOW>;
+    status = "okay";
+    my_spi_device_2: myspidev@1 {
+        compatible = "zephyr,spi-device";
+        reg = <0>;
+        spi-max-frequency = <10000000>;
+        label = "MY_SPI_DEVICE_2";
+    };
+};*/
+
+&spi2 {
+    status = "okay";
+    pinctrl-0 = < &spi2_sck_pa9 &spi2_miso_pb14 &spi2_mosi_pb15 >;
+    pinctrl-names = "default";
+    
+   /* my_spi_device_2: myspidev@0 {
+        //compatible = "zephyr,spi-device"; 
+        reg = <0>;
+        //duplex = <SPI_FULL_DUPLEX>;
+        //frame-format = <SPI_FRAME_FORMAT_MOTOROLA>;
+        //spi-max-frequency = <1000000>;
+        //cs-gpios = <&gpioa 7 GPIO_ACTIVE_LOW>;
+        //label = "MY_SPI_DEVICE_2";
+    };*/
 };
 
