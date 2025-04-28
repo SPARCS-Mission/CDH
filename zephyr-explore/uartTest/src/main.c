@@ -49,7 +49,7 @@ int main(void)
 
 	while (i--) {
 		snprintf(send_buf, 64, "Hello from device %s, num %d", uart0->name, i);
-		send_str(uart0, send_buf);
+			send_str(uart0, send_buf);
 		/* Wait some time for the messages to arrive to the second uart. */
 		k_msleep(1000);
 		recv_str(uart2, recv_buf);
