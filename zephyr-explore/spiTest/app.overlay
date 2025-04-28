@@ -1,18 +1,4 @@
-&gpioa {
-    status = "okay";
-};
 
-&gpioe {
-    label = "mygpioe";
-    status = "okay";
-};
-
-&leds{
-    	purple_led: led_20 {
-			gpios = < &gpioe 0x3 0x0 >;
-			label = "User LD20";
-		};
-};
 /*
 &spi1 {
     status = "okay";
