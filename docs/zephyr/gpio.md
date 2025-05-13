@@ -75,10 +75,10 @@ west flash
 
 ## Test Results 📊
 - The LED blinked at a steady 1-second interval as expected.  
-![gpio-led_blinking]( /../../images/zephyr/gpio-led_blinking.jpeg "led blinking")
+<img src="../../images/zephyr/gpio-led_blinking" alt="led blinking" width="600" />  
 - After modifying `SLEEP_TIME` to 100 ms, the LED blinked visibly faster.
 - Observed results via UART/console output.  
-![gpio-led_state]( /../../images/zephyr/gpio-console.png "led state")
+![gpio-led_state]( ../../images/zephyr/gpio-console.png "led state")
 
 ## Lessons Learned / Next Steps 🎯
 - Gained hands-on experience with Zephyr’s device tree and GPIO API.
