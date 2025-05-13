@@ -1,4 +1,4 @@
-&gpioe {
-    label = "mygpioe";
+&gpioa {
+    label = "mygpioa";
     status = "okay";
 };

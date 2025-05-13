@@ -1,19 +1,7 @@
 /**
  * @file 
  * @brief blink an LED by toggeling a gpio 
- * 
- * 	Continuing the previous topic (get access to a component like GPIO or ...)
- * 	Another way is using <_dt_spec>
- * 	The word spec stands for specification and it refers to a struct that encapsulates 
- *  all the necessary information about a device or peripheral (like device pointers and configuration)
- *  in one place. you can use <*_DT_SPEC_GET> functions to get _dt_spec structure and First 
- *  we need a devicetree node identifier. A lot of MACROS could make that possible such as:
- * 	1. DT_ALIAS(alias)
- *  2. DT_NODELABEL(label)
- *  3. DT_CHOSEN(chosen)
- *  4. DT_PATH(soc, pin-controller@58020000, gpio@58020000) // example path
- * 	
- * 
+ *
  * @authors Roham Kaveie - Farzane Majd
  * @date 2025-04-25
  */
@@ -27,9 +15,11 @@
 #include <zephyr/drivers/spi.h>
 
 
-#define SLEEP_TIME_MS 500 
+#define SLEEP_TIME_MS 100 
 
-#define LED0_NODE DT_ALIAS(led0)
+#define LED0_NODE DT_ALIAS(led3)
+// #define LED0_NODE DT_NODELABEL(my_led)
+// #define LED0_NODE DT_PATH(leds, led_3)
 
 // if these information (NODELABEL of PORT,PIN number, and configuration flags) needed: 
 // #define LED_GPIO DT_GPIO_LABEL(LED0_NODE, gpios)
@@ -37,7 +27,7 @@
 // #define LED_FLAGS DT_GPIO_FLAGS(LED0_NODE, gpios)
 
 int main(){
-    struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
+    struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 	gpio_pin_configure_dt(&led,GPIO_OUTPUT_ACTIVE);
 	while(1) {
 		gpio_pin_toggle_dt(&led);
