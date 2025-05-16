@@ -1,14 +1,8 @@
-/*&spi1 {
+&spi1 {
     cs-gpios = <&gpioa 7 GPIO_ACTIVE_LOW>;
+    //clocks = < &rcc STM32_CLOCK_BUS_APB2 0x1000 >;
+};
 
-    my_spi_device: my_port: myspidev@0 {
-        
-        reg = <0>;
-        spi-max-frequency = <1000000>;
-        label = "MY_SPI_DEVICE";
-    };
-};*/
-/*
 &spi2 {
     pinctrl-0 = < &spi2_sck_pa9 &spi2_miso_pb14 &spi2_mosi_pb15 >;
     pinctrl-names = "default";
@@ -17,24 +11,22 @@
     my_spi_device_2: myspidev@1 {
         compatible = "zephyr,spi-device";
         reg = <0>;
-        spi-max-frequency = <10000000>;
+        spi-max-frequency = <32000000>;
         label = "MY_SPI_DEVICE_2";
     };
-};*/
-
-&spi2 {
-    status = "okay";
-    pinctrl-0 = < &spi2_sck_pa9 &spi2_miso_pb14 &spi2_mosi_pb15 >;
-    pinctrl-names = "default";
-    
-   /* my_spi_device_2: myspidev@0 {
-        //compatible = "zephyr,spi-device"; 
-        reg = <0>;
-        //duplex = <SPI_FULL_DUPLEX>;
-        //frame-format = <SPI_FRAME_FORMAT_MOTOROLA>;
-        //spi-max-frequency = <1000000>;
-        //cs-gpios = <&gpioa 7 GPIO_ACTIVE_LOW>;
-        //label = "MY_SPI_DEVICE_2";
-    };*/
 };
 
+&clk_hsi{
+    status = "okay";
+};
+
+&rcc{
+    clocks = < &clk_hsi >;
+    clock-frequency = < 0x3d09000 >;
+    d1cpre = < 0x1 >;
+    hpre = < 0x4 >;
+    d1ppre = < 0x1 >;
+    d2ppre1 = < 0x1 >;
+    d2ppre2 = < 0x1 >;
+    d3ppre = < 0x1 >;
+};
