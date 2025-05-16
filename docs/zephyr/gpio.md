@@ -52,8 +52,12 @@ You can use `*_DT_SPEC_GET` functions to get a `_dt_spec` structure. First, we n
   - Get device binding for the LED GPIO controller
   - Configure the LED pin as output
   - Toggle the LED state in an infinite loop with a delay (`k_sleep`)
-- LED state is sent to the console via UART using prink function
-- Source code primarily in `blinky/src/main.c` and `blinky-v2/src/main.c`
+- LED state is sent to the console via UART using prink function and 
+- Provided UART or console output to display test results.  
+``` bash
+minicom -D /dev/ttyACM0
+```
+- Source code primarily in `zephyr-apps/blinky/src/main.c` and `zephyr-apps/blinky-v2/src/main.c`
 
 ## Build & Flash Instructions ⚙️
 1. Navigate to the application directory.
@@ -76,7 +80,9 @@ west flash
 ## Test Results 📊
 - The LED blinked at a steady 1-second interval as expected.  
 <img src="../../images/zephyr/gpio-led_blinking" alt="led blinking" width="600" />  
+
 - After modifying `SLEEP_TIME` to 100 ms, the LED blinked visibly faster.
+
 - Observed results via UART/console output.  
   
 ![gpio-led_state]( ../../images/zephyr/gpio-console.png "led state")
