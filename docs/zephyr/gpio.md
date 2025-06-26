@@ -42,18 +42,18 @@ You can use `*_DT_SPEC_GET` functions to get a `_dt_spec` structure. First, we n
 
 
 ## Implementation Details 🛠️
-- The pin is intended to toggle OFF&ON is PA3
-- Configured the LED pin using Zephyr’s device tree alias `led3`
+- The pin PA3 is intended to toggle OFF&ON.
+- Configure the LED pin using Zephyr’s device tree alias `led3`
 - In blinky application, a bind is created to get the access to the `gpioa` device directly.
 - To use the device_get_binding function, it's needed to add a label property for gpioe (see app.overlay).
-- In blinky-v2 application, dt_spec functions are used to get access to the pin (not the bus device which means the gpioe)
+- In blinky-v2 application, dt_spec functions are used to get access to the pin (not gpioa bus)
 - all possible ways to pass a node identifier to de_spec_get function are in the main.c
 - Used GPIO API to:
   - Get device binding for the LED GPIO controller
   - Configure the LED pin as output
-  - Toggle the LED state in an infinite loop with a delay (`k_sleep`)
+  - Toggle the LED state in an infinite loop with a delay (`k_msleep`)
 - LED state is sent to the console via UART using prink function and 
-- Provided UART or console output to display test results.  
+- Provides UART or console output to display test results.  
 ``` bash
 minicom -D /dev/ttyACM0
 ```
@@ -72,10 +72,10 @@ west flash
 4. The LED should start blinking immediately after flashing.
 
 ## Test Procedure 🧪
-- Observed the LED behavior on the board.  
-- Tested changing the blink interval by modifying `#define SLEEP_TIME` in `src/main.c` (e.g., from 1000 ms to 100 ms) and rebuilding/flashing.
-- Verified that the LED blinked faster with the reduced delay.
-- Observed LED state via UART/console output.
+- Observe the LED behavior on the board.  
+- Change the blink interval by modifying `#define SLEEP_TIME` in `src/main.c` (e.g., from 1000 ms to 100 ms) and rebuilding/flashing.
+- Verifiy that the LED blinked faster with the reduced delay.
+- Observe LED state via UART/console output.
 
 ## Test Results 📊
 - The LED blinked at a steady 1-second interval as expected.  
@@ -89,7 +89,6 @@ west flash
 
 ## Lessons Learned / Next Steps 🎯
 - Gained hands-on experience with Zephyr’s device tree and GPIO API.
-- Understood the build and flash workflow using `west`.
 - Next steps include exploring interrupts, multi-threading, and integrating other peripherals.
 
 ## References 📚

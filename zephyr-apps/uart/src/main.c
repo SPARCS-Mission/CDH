@@ -9,7 +9,7 @@ const struct device *uart0 = DEVICE_DT_GET(DT_NODELABEL(usart2));
 const struct device *uart2 = DEVICE_DT_GET(DT_NODELABEL(usart3));
 
 struct uart_config uart_cfg = {
-	.baudrate = 9600,
+	.baudrate = 115200,
 	.parity = UART_CFG_PARITY_NONE,
 	.stop_bits = UART_CFG_STOP_BITS_1,
 	.flow_ctrl = UART_CFG_FLOW_CTRL_NONE,
@@ -18,24 +18,28 @@ struct uart_config uart_cfg = {
 
 void send_str(const struct device *uart, char *str)
 {
-	int msg_len = strlen(str);
 
-	for (int i = 0; i < msg_len; i++) {
-		uart_poll_out(uart, str[i]);
-	}
+	uart_tx(uart,str,64,1000);
+	// int msg_len = strlen(str);
+	// for (int i = 0; i < msg_len; i++) {
+	// 	uart_poll_out(uart, str[i]);
+	// }
 
 	printk("Device %s sent: \"%s\"\n", uart->name, str);
 }
 
 void recv_str(const struct device *uart, char *str)
 {
-	char *head = str;
-	char c;
 
-	while (!uart_poll_in(uart, &c)) {
-		*head++ = c;
-	}
-	*head = '\0';
+	uart_rx_enable(uart,str,64,1000);
+
+	// char *head = str;
+	// char c;
+
+	// while (!uart_poll_in(uart, &c)) {
+	// 	*head++ = c;
+	// }
+	// *head = '\0';
 
 	printk("Device %s received: \"%s\"\n", uart->name, str);
 }
@@ -47,15 +51,6 @@ int main(void)
 	char recv_buf[64];
 	int i = 10;
 
-	while (i--) {
-		snprintf(send_buf, 64, "Hello from device %s, num %d", uart0->name, i);
-			send_str(uart0, send_buf);
-		/* Wait some time for the messages to arrive to the second uart. */
-		k_msleep(1000);
-		recv_str(uart2, recv_buf);
-
-		k_msleep(1000);
-	}
 
 	uart_cfg.baudrate = 9600;
 	printk("\nChanging baudrate of both uart devices to %d!\n\n", uart_cfg.baudrate);
@@ -69,10 +64,9 @@ int main(void)
 		printk("Could not configure device %s", uart2->name);
 	}
 
-	i = 10;
 	while (i--) {
 		snprintf(send_buf, 64, "Hello from device %s, num %d", uart0->name, i);
-		send_str(uart0, send_buf);
+			send_str(uart0, send_buf);
 		/* Wait some time for the messages to arrive to the second uart. */
 		k_msleep(1000);
 		recv_str(uart2, recv_buf);

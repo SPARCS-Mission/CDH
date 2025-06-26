@@ -1,14 +1,7 @@
-# Zephyr UART Loopback Application 🔄
+# Zephyr UART Loopback Test Application 
 
 ## Overview 📝
 This application demonstrates the use of the UART peripheral on an STM32 board running Zephyr RTOS by performing a hardware loopback test. The goal was to configure UART, send data, and verify correct reception by physically connecting the TX and RX pins, allowing transmitted data to be immediately received back. This validates both the UART driver configuration and the hardware wiring.
-
-## Environment & Requirements 💻
-- **Hardware:** STM32 development board (e.g., STM32F4 series)
-- **Connections:** TX and RX pins physically connected for loopback
-- **Software/OS:** Zephyr RTOS (version as used in the project)
-- **Toolchain:** `arm-none-eabi-gcc`, `west`
-- **Dependencies:** Zephyr UART driver, correct device tree configuration for UART peripheral
 
 ## Implementation Details 🛠️
 - Configured the UART peripheral in the device tree, enabling the appropriate UART instance and assigning correct pins for TX and RX[1][7].

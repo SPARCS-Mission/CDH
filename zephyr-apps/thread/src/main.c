@@ -1,4 +1,9 @@
 #include <zephyr/kernel.h>
+
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
+#include <zephyr/drivers/gpio.h>
+
 /* size of stack area used by each thread */
 #define STACKSIZE 1024
 
@@ -25,8 +30,8 @@ void threadA(void *dummy1, void *dummy2, void *dummy3)
 
 	while (1)
 	{
-		printk("thread_a: thread loop \n");
-		k_msleep(4000);
+		printk("thread_a: Hello in the loop \n");
+		k_msleep(1000);
 	}
 
 }
@@ -39,10 +44,16 @@ void threadB(void *dummy1, void *dummy2, void *dummy3)
 
 	printk("thread_b: thread started \n");
 
+	
+	const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led0),gpios);
+
+	gpio_pin_configure_dt(&led,GPIO_OUTPUT_ACTIVE);
+
 	while (1)
 	{
-		printk("thread_b: thread loop \n");
-		k_msleep(1000);
+		gpio_pin_toggle_dt(&led);
+		printk("thread_b: blinking green led \n");
+		k_msleep(200);
 	}
 
 }

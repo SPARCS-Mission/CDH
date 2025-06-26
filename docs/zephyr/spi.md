@@ -1,19 +1,19 @@
-# Zephyr SPI Loopback Application 🔄
+# Zephyr SPI Loopback Test Application 🔄
 
 ## Overview 📝
 This application demonstrates the use of the SPI peripheral on an STM32 board running Zephyr RTOS by performing a hardware loopback test. The goal was to configure the SPI interface, send data, and verify correct reception by physically connecting the MOSI and MISO pins, allowing transmitted data to be immediately received back. 
 
 ## Implementation Details 🛠️
-- Configured the SPI peripheral in the device tree, enabling the appropriate SPI instance and assigning correct pins for SCK, MOSI, and MISO[1] [2] [5] [7].  
+- Configure the SPI peripheral in the device tree, enabling the appropriate SPI instance and assigning correct pins for SCK, MOSI, and MISO[1] [2] [5] [7].  
 - ⚠️ We failed to write a driver to use SPI and had to use the SPI bus directly as a device binding.
 - Application code:
-  - Obtained the SPI device binding using Zephyr’s device API.
+  - Obtaine the SPI device binding directly using Zephyr’s device API.
   - Set up an SPI configuration structure specifying parameters such as frequency, mode, and word size[2] [7].
-  - Prepared a transmit buffer with a known data pattern (e.g., "Hello, SPI!" or a fixed byte sequence).
+  - Prepare a transmit buffer with a known data pattern (e.g., "DANKE" (Thank you in German :D) or a fixed byte sequence).
   - Set up a receive buffer of equal length.
   - Used Zephyr’s `spi_transceive()` or `spi_write()`/`spi_read()` API to send and receive data in full-duplex mode[2] [5] [7].
-  - Compared the received buffer to the transmitted data to verify correct loopback operation.
-- Provided UART or console output to display test results.
+  - Compare the received buffer to the transmitted data to verify correct loopback operation.
+- Provide UART or console output to display test results.
 ``` bash
 minicom -D /dev/ttyACM0
 ```
@@ -32,26 +32,23 @@ west flash
 5. Open a serial terminal to view test output.
 
 ## Test Procedure 🧪
-- Connected MOSI and MISO pins on the STM32 board.
-- On boot, the application sent a known data pattern over SPI and attempted to read the response.
-- Compared the received data buffer to the transmitted buffer.
-- Repeated the test with different data patterns and SPI configurations (e.g., clock speed, mode).
-- Observed results via UART/console output.
-- Observed the data pattern using a logic analyser captured from the board.
+- MOSI and MISO pins are connected together on the STM32 board.
+- Compare the received data buffer to the transmitted buffer.
+- Repeate the test with different data patterns and SPI configurations (e.g., clock speed, mode).
+- Observe results via UART/console output.
+- Observe the data pattern using a logic analyser captured from the board.
 
 ## Test Results 📊
 - When MOSI and MISO were connected, the received data matched the transmitted data exactly for all tested patterns and configurations.  
 
 ![message recieved]( ../../images/zephyr/spi-console.png "message recieved")
 
-- Changing the transmit data resulted in corresponding changes in the received data, confirming proper loopback.
-- No errors or mismatches were observed in the test cases.
-- The SPI peripheral and Zephyr driver operated reliably in loopback mode.
-- ⚠️ We falied to write an overlay to set a specefic clock rate for spi 
 - The MOSI and SCK output signals were observed for a short period of time by the logic analyzer.  
 
 ![logicAnalyzer]( ../../images/zephyr/spi-logicAnalyzer.png "logic analyzer")
 
+- ⚠️ The SPI peripheral and Zephyr driver do not operate reliably. I mean the widths of pulses in SCK signal are not equal. 
+- ⚠️ We falied to write an overlay to set a specefic clock rate for spi (maybe **writing an overlay** is not the correct way at all).
 
 
 ## References 📚
